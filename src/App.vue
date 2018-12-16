@@ -1,27 +1,24 @@
 <template>
   <div>
-    <div v-if="list.length > 0">
-      <h1>Participants list</h1>
-      <ol>
-        <li v-for="person in list">
-          {{ person.first }} {{ person.last }}
-        </li>
-      </ol>
-    </div>
-
     <h3>New participant</h3>
+    <participants-list :list="list"></participants-list>
     <form @submit.prevent="addNewParticipant()">
-      <label>First name </label>
-      <input type="text" v-model="newPerson.first">
-      <label>Last name </label>
-      <input type="text" v-model="newPerson.last">
-      <button>Add new participant</button>
+      <div class="form-group">
+        <label> First name </label>
+        <input type="text" class="form-control" v-model="newPerson.first">
+        <label> Last name </label>
+        <input class="form-control" v-model="newPerson.last">
+        <button class="btn btn-dark">Add new participant</button>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
+  import ParticipantsList from "./ParticipantsList.vue";
+
   export default {
+    components: {ParticipantsList},
     data() {
       return {
         newPerson: {first: '' , last: ''},
@@ -33,7 +30,7 @@
 
       addNewParticipant() {
         this.list.push(this.newPerson),
-        this.newPerson= {}
+        this.newPerson = {}
       }
     }
   };
